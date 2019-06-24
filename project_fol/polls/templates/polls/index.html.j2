@@ -1,0 +1,17 @@
+{% extends "./layout.html.j2" %}
+
+{% block title %} Polls {% endblock %}
+
+{% block body %}
+
+  {% if l_q_l %}
+      <ul>
+        {% for q in l_q_l %}
+            <li> <a href="{% url 'polls:detail' q.id %}">{{ q.question_text }}</a></li>
+        {% endfor %}
+      </ul>
+  {% else %}
+      <p>No pools are availabale</p>
+  {% endif %}  
+
+{% endblock %}

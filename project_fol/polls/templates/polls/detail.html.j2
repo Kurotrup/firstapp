@@ -1,0 +1,23 @@
+{% extends "./layout.html.j2" %}
+
+{% block title %} Specificatiobs {% endblock %}
+
+{% block body %}
+  <h1>{{ q.question_text }}</h1>  
+  {% if er_m %}
+      <p>
+        <strong> {{ er_m }} </strong>
+      </p>
+  {% endif %}
+
+  <form action="{% url 'polls:vote' q.id %}" method="post">
+    {% csrf_token %}
+    {% for ch in q.choice_set.all %}
+      <input type="radio" name="choice" id="choice{{ forloop.counter }}"
+      value="{{ ch.id }}">
+      <label for="choice{{ forloop.counter }}">{{ ch.choice_text }}</label><br>
+    {% endfor %}
+    <br>
+    <input type="submit" value="Vote">
+  </form>
+{% endblock %}

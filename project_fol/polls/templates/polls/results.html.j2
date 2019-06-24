@@ -1,0 +1,16 @@
+{% extends "./layout.html.j2" %}
+
+{% block title %}Results{% endblock %}
+
+{% block body %}
+  <h1> {{ q.question_text }} </h1>
+
+  <ul>
+    {% for ch in q.choice_set.all %}
+        <li>{{ ch.choice_text }} -- {{ ch.votes }} vote{{ ch.votes|pluralize }}
+        </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url "polls:detail" q.id %} ">Vote again</a>
+{% endblock %}
